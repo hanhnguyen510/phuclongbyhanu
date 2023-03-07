@@ -1,0 +1,11 @@
+.img-slider {
+    margin-top: 115px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+@media only screen and (max-width: 768px) {
+    .img-slider {
+        margin-top: 69px;
+    }
+}

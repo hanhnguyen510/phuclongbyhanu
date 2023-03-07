@@ -1,0 +1,50 @@
+.container {
+    position: relative;
+    margin-top: 112px;
+    .mySwiper {
+        .swpierslide {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .swiperPrevIcon,
+        .swiperNextIcon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            cursor: pointer;
+            font-size: 4.5rem;
+            color: #fff;
+            &:hover {
+                color: var(--primary-text);
+            }
+        }
+        .swiperPrevIcon {
+            left: 50px;
+        }
+        .swiperNextIcon {
+            right: 50px;
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .container {
+        margin-top: 70px;
+
+        .mySwiper {
+            .swiperPrevIcon,
+            .swiperNextIcon {
+                font-size: 2.5rem;
+            }
+            .swiperPrevIcon {
+                left: 20px;
+            }
+            .swiperNextIcon {
+                right: 20px;
+            }
+        }
+    }
+}

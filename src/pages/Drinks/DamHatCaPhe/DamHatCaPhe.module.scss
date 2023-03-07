@@ -1,0 +1,33 @@
+.content {
+    display: flex;
+    margin: auto;
+    width: 1140px;
+    align-items: center;
+
+    .img-1 {
+        border-radius: 50px;
+    }
+    .item {
+        padding: 15px;
+
+        .text {
+            font-size: 1.7rem;
+            line-height: 2.6rem;
+            color: #171717;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .content {
+        width: 100%;
+        padding: 15px;
+    }
+    .img-1 {
+        width: 100%;
+        height: auto;
+    }
+    .item {
+        padding: 0;
+    }
+}

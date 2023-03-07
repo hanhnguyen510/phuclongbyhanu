@@ -1,0 +1,150 @@
+.page {
+    position: relative;
+    .back-to-top {
+        font-size: 3.5rem;
+        color: #0c713d;
+        position: fixed;
+        right: 30px;
+        bottom: 35px;
+        right: 30px;
+        bottom: 50px;
+        cursor: pointer;
+    }
+    .ring {
+        background: #1a1919;
+        border-radius: 21px;
+        z-index: 200;
+        position: fixed;
+        top: 85%;
+        left: 5%;
+        display: flex;
+        align-items: center;
+        padding: 0 8px;
+        .text-call {
+            display: flex;
+            align-items: center;
+            height: 50px;
+            margin-left: 35px;
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        .quickcallbtn {
+            .phone-ring {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .quick-alo-circle {
+                    width: 120px;
+                    height: 120px;
+
+                    position: absolute;
+                    border-radius: 100%;
+                    background-color: transparent;
+
+                    border-radius: 100%;
+                    opacity: 0.1;
+                    border: 2px solid rgb(13, 110, 60);
+                    animation: quick-alo-circle-anim 1.2s infinite ease-in-out;
+                    transition: all 0.5s;
+                }
+                .quick-alo-circle-fill {
+                    background-color: rgb(13, 110, 60);
+                    width: 70px;
+                    height: 70px;
+
+                    position: absolute;
+
+                    border-radius: 50%;
+                    border-radius: 100%;
+                    border: 2px solid transparent;
+                    opacity: 0.1;
+                    animation: quick-alo-circle-fill 2.3s infinite ease-in-out;
+                    transition: all 0.5s;
+                }
+                .quick-alo-circle-img {
+                    background-color: #0c3;
+
+                    width: 50px;
+                    height: 50px;
+
+                    position: absolute;
+
+                    border-radius: 100%;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    animation: quick-alo-circle-img 1s infinite ease-in-out;
+                    transition: all 0.5s;
+                }
+            }
+        }
+    }
+}
+@keyframes quick-alo-circle-fill {
+    0% {
+        transform: rotate(0) scale(0.7) skew(1deg);
+        opacity: 0.2;
+    }
+    50% {
+        transform: rotate(0) scale(1) skew(1deg);
+        opacity: 0.2;
+    }
+    100% {
+        transform: rotate(0) scale(0.7) skew(1deg);
+        opacity: 0.2;
+    }
+}
+
+@keyframes quick-alo-circle-anim {
+    0% {
+        -webkit-transform: rotate(0) scale(0.5) skew(1deg);
+        -webkit-opacity: 0.1;
+    }
+
+    30% {
+        -webkit-transform: rotate(0) scale(0.7) skew(1deg);
+        -webkit-opacity: 0.5;
+    }
+
+    100% {
+        -webkit-transform: rotate(0) scale(1) skew(1deg);
+        -webkit-opacity: 0.1;
+    }
+}
+
+@keyframes quick-alo-circle-img {
+    0% {
+        transform: rotate(0) scale(1) skew(1deg);
+    }
+    10% {
+        transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    20% {
+        transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    30% {
+        transform: rotate(-25deg) scale(1) skew(1deg);
+    }
+    40% {
+        transform: rotate(25deg) scale(1) skew(1deg);
+    }
+    50% {
+        transform: rotate(0) scale(1) skew(1deg);
+    }
+    100% {
+        transform: rotate(0) scale(1) skew(1deg);
+    }
+}
+@media only screen and (max-width: 768px) {
+    .page {
+        .ring {
+            bottom: 15%;
+            left: 85%;
+            .text-call {
+                display: none;
+            }
+        }
+    }
+}

@@ -1,0 +1,208 @@
+.modal {
+    // animation: fade 10s linear;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+
+    .modal-dialog {
+        width: 60%;
+        animation: modalFadeIn ease 0.8s;
+        background-image: url('https://phuclong.com.vn/images/background/bg_popup.png');
+        .btn-close {
+            font-size: 2rem;
+            float: right;
+            padding: 12px;
+            cursor: pointer;
+            background-color: transparent;
+        }
+        .modal-content {
+            padding: 40px;
+
+            .item-img {
+                .item-infor-mb {
+                    display: none;
+                }
+                img {
+                }
+                .item-price {
+                    font-weight: 700;
+                    font-size: 3rem;
+                    color: var(--primary-text);
+                    text-align: center;
+                }
+            }
+            .item-infor {
+                padding: 0 15px;
+                .item-title {
+                    text-align: center;
+
+                    font-weight: 700;
+                    font-size: 2.5rem;
+                    color: var(--primary-text);
+                    margin-bottom: 20px;
+                }
+                .item-desc {
+                    text-align: center;
+                    color: #171717;
+                    font-size: 1.4rem;
+                    margin-bottom: 20px;
+                }
+                .item-size {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    margin-bottom: 20px;
+                    span {
+                        margin-right: 30px;
+                        line-height: 3.7rem;
+                        font-weight: 600;
+                    }
+                }
+                .item-quantity {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    margin-bottom: 20px;
+                    span {
+                        margin-right: 30px;
+                        line-height: 3.7rem;
+                        font-weight: 600;
+                    }
+                    .change-decrease {
+                    }
+                    .quantity {
+                    }
+                    .change-increase {
+                    }
+                }
+                .item-notes {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    margin-bottom: 20px;
+                    span {
+                        margin-right: 30px;
+                        line-height: 3.7rem;
+                        font-weight: 600;
+                    }
+                    input {
+                        flex: 1;
+                        max-width: 220px px;
+                        height: 60px;
+                        border: #171717 solid 1px;
+                    }
+                }
+                .item-total-price {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    margin-bottom: 20px;
+                    span {
+                        margin-right: 30px;
+                        line-height: 3.7rem;
+                        font-weight: 600;
+                    }
+                    .total-price {
+                        color: var(--primary-text);
+                        font-weight: 600;
+                        font-size: 1.9rem;
+                    }
+                }
+                .add-to-cart {
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                }
+            }
+        }
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-130px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@media only screen and (max-width: 768px) {
+    .modal {
+        display: block;
+        font-size: 1.2rem;
+        padding: 15px;
+
+        .modal-dialog {
+            padding: 15px;
+            width: 100%;
+            height: auto;
+            .btn-close {
+                padding: 0;
+            }
+            .modal-content {
+                padding: 0;
+                .item-img {
+                    display: flex;
+                    img {
+                        max-width: 30%;
+                        width: 96px;
+                        height: 96px;
+                        object-fit: cover;
+                    }
+                    .item-infor-mb {
+                        flex: 1;
+                        display: block;
+                        font-weight: 600;
+                        padding: 12px 6px;
+                        .item-title-mb {
+                            font-size: 1.6rem;
+                            color: var(--primary-text);
+                        }
+                        .item-price-mb {
+                            margin-top: 6px;
+                            font-size: 1.3rem;
+                            color: #171717;
+                        }
+                    }
+                    .item-price {
+                        display: none;
+                    }
+                }
+                .item-infor {
+                    .item-title {
+                        display: none;
+                    }
+                    .item-desc {
+                    }
+                    .item-size {
+                    }
+                }
+                .item-quantity {
+                }
+                .item-notes {
+                    span {
+                    }
+                    input {
+                    }
+                }
+                .item-total-price {
+                    .total-price {
+                    }
+                    span {
+                    }
+                }
+            }
+        }
+    }
+}

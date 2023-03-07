@@ -1,0 +1,110 @@
+.footer {
+    width: 100%;
+    margin-top: 50px;
+    border-top: 1px solid #0c713d;
+    background-color: #aff5d1;
+    padding-top: 20px;
+    .wrapper {
+        display: flex;
+        width: 1140px;
+        margin: auto;
+        .coppy_right {
+            font-size: 1.5rem;
+            line-height: 1.9rem;
+            .title {
+                color: #000;
+                font-weight: bold;
+            }
+            .text {
+                font-size: 1.4rem;
+                color: #171717;
+            }
+        }
+        .follow {
+            h5 {
+                font-size: 1.5rem;
+                color: #3a3a3a;
+                margin-bottom: 10px;
+            }
+            input {
+                height: 34px;
+                padding: 6px 8px;
+                font-size: 1.4rem;
+                line-height: 1.4rem;
+                color: #333;
+                background-color: #fff;
+
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                border-color: #0c713d;
+                margin-right: 4px;
+            }
+            a {
+                margin-top: 8px;
+                color: #171717;
+                display: block;
+            }
+            .error {
+                color: red;
+                font-size: 1.3rem;
+            }
+        }
+        .language {
+            text-align: end;
+            .lang-wrapper {
+                margin-right: 10px;
+                .lang-item {
+                    font-size: 1.4rem;
+                    padding: 4px;
+                    color: #333;
+                    &:hover {
+                        color: #1c9e5b;
+                    }
+                }
+                .active {
+                    color: var(--primary-text);
+                    font-weight: 700;
+                }
+            }
+            .social {
+                padding: 8px 0;
+                ul {
+                    display: flex;
+                    justify-content: end;
+                    li {
+                        font-size: 2.4rem;
+                        padding: 8px;
+                        a {
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .cpright {
+        margin-top: 12px;
+        background-color: #000;
+        font-size: 1rem;
+
+        padding: 2px 15px 3px;
+        color: #8d8d8d;
+        text-align: center;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .footer {
+        padding: 15px;
+        .wrapper {
+            width: 100%;
+            .coppy_right {
+                font-size: 1.2rem;
+            }
+            .follow {
+                input {
+                    width: 100%;
+                    margin-bottom: 6px;
+                }
+            }
+        }
+    }
+}
