@@ -17,18 +17,25 @@ import zalopay from '~/assets/images/Payment/zalopay.08ce522.png';
 const cx = classNames.bind(styles);
 
 function Payment() {
-    const data = useSelector((state) => state.customerInforReducer.dataCustomer);
-    const dataCart = useSelector((state) => state.cartReducer.carts);
-
-    const total = () => {
-        const price = dataCart.map((item) => item.total);
-
-        return price.reduce((sum, item) => sum + item, 0);
-    };
+    const data = useSelector((state) => state.dataCustomer.customerInfor);
+    const total = useSelector((state) => state.carts.cartTotalAmount);
     const VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
     });
+    let discount = 0;
+    if (total > 40000) {
+        discount = 10000;
+    }
+    if (total > 200000) {
+        discount = 20000;
+    }
+    if (total > 300000) {
+        discount = 30000;
+    }
+    if (total > 400000) {
+        discount = 40000;
+    }
     return (
         <div className={cx('container')}>
             <div className={cx('block-process')}>
@@ -89,7 +96,7 @@ function Payment() {
                         <span> Giao đến: </span> {data.address}
                     </div>
                     <div className={cx('infor')}>
-                        <span> Tổng tiền: </span> {VND.format(total())}
+                        <span> Tổng tiền: </span> {VND.format(total - discount)}
                     </div>
                 </div>
 

@@ -4,9 +4,9 @@ import classNames from 'classnames/bind';
 import { Link, Navigate } from 'react-router-dom';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import googleLogo from '~/assets/images/Login/google.svg';
-import fbLogo from '~/assets/images/Login/facebook.svg';
+
 import logoLogin from '~/assets/images/Home/logo_2.png';
-import { signInWithGoogle } from '../../redux/actions';
+// import { signInWithGoogle } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
 
@@ -17,7 +17,7 @@ function Login() {
     // const { user } = data;
     // console.log('user', user);
     const handleGGLogin = () => {
-        dispatch(signInWithGoogle());
+        // dispatch(signInWithGoogle());
     };
     return (
         <>

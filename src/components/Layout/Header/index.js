@@ -2,16 +2,16 @@ import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { Link, NavLink } from 'react-router-dom';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { delivery, logo, logo1, logo2 } from '../../../utils/imageHome';
-import deliveryMobile from '~/assets/images/Home/delivery-mobile.png';
-import Cart from '../../Cart';
 import { useRef, useState } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch, useSelector } from 'react-redux';
-import { singOutWithGoogle } from '../../../redux/actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+
+import { delivery, logo, logo1, logo2 } from '../../../utils/imageHome';
+import deliveryMobile from '~/assets/images/Home/delivery-mobile.png';
+import Cart from '../../Cart';
+
 const cx = classNames.bind(styles);
 function Header() {
     const menuRef = useRef();
@@ -22,22 +22,23 @@ function Header() {
     };
     const dispatch = useDispatch();
 
-    const data = useSelector((state) => state.userReducer.user);
-    const singOutHandler = () => {
-        dispatch(singOutWithGoogle());
-    };
+    // const data = useSelector((state) => state.userReducer.user);
+    const singOutHandler = () => {};
 
     // cart in mobile
+    const VND = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    });
+    const qty = useSelector((state) => state.carts.cartTotalQuantity);
+    const total = useSelector((state) => state.carts.cartTotalAmount);
+    // const count = dataCart.map((item) => item.count);
+    // const qty = count.reduce((sum, item) => sum + item, 0);
+    // const total = () => {
+    //     const price = dataCart.map((item) => item.total);
 
-    const dataCart = useSelector((state) => state.cartReducer.carts);
-
-    const count = dataCart.map((item) => item.count);
-    const qty = count.reduce((sum, item) => sum + item, 0);
-    const total = () => {
-        const price = dataCart.map((item) => item.total);
-
-        return price.reduce((sum, item) => sum + item, 0);
-    };
+    //     return price.reduce((sum, item) => sum + item, 0);
+    // };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('h-top')}>
@@ -60,7 +61,7 @@ function Header() {
                     </a>
                     <div className={cx('action')}>
                         <Link to="/" className={cx('account')}></Link>
-                        {data ? (
+                        {/* {data ? (
                             <div className={cx('userLogin')}>
                                 <img className={cx('avatar')} src={data.photoURL} alt="" />
 
@@ -73,7 +74,7 @@ function Header() {
                             <Link to="/login" className={cx('account')}>
                                 <span>Log in</span>
                             </Link>
-                        )}
+                        )} */}
                         <div className={cx('lang-wrapper')}>
                             <Link to="/">
                                 <span className={cx('lang-item', 'active')}>VN</span>
@@ -255,7 +256,7 @@ function Header() {
                 <ShoppingCartOutlinedIcon sx={{ fontSize: '20px', color: '#fff' }} />
                 <div className={cx('cart-number')}>{qty}</div>
                 <span className={cx('payload-mb')}>THANH TOÁN</span>
-                <span className={cx('total-mb')}>{total()} đ</span>
+                <span className={cx('total-mb')}>{VND.format(total)} </span>
             </Link>
         </header>
     );

@@ -5,14 +5,14 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/actions';
+import { addToCart } from '../../redux/features/cartsSlice';
 const cx = classNames.bind(styles);
 
 function Modal({ data, setIsOpen }) {
     const dispatch = useDispatch();
     const [count, setCount] = useState(1);
     const [total, setTotal] = useState(data.price);
-    const newData = { ...data, count: count, total: total };
+    const newData = { ...data, qty: count, total: total };
 
     const handleAddCart = () => {
         setIsOpen(false);

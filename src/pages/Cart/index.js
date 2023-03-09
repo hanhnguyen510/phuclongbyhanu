@@ -3,53 +3,47 @@ import classNames from 'classnames/bind';
 import styles from './Cart.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-
-import { deleteToAllCart } from '../../redux/actions';
-import { addToCart } from '../../redux/actions';
-import { removeToCart } from '../../redux/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { faClose, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import DeleteIcon from '@mui/icons-material/Delete';
 import cartEmpty from '~/assets/images/Home/cart-empty.png';
+import { addToCart, removeFromCart, decreaseCart, increaseCart } from '../../redux/features/cartsSlice';
+
 const cx = classNames.bind(styles);
 
 function Cart() {
     let discount = 0;
 
     const dispatch = useDispatch();
-    const data = useSelector((state) => state.cartReducer.carts);
+    const data = useSelector((state) => state.carts.cartItems);
+    const total = useSelector((state) => state.carts.cartTotalAmount);
+
     const VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
     });
-    const total = () => {
-        const price = data.map((item) => item.total);
 
-        return price.reduce((sum, item) => sum + item, 0);
-    };
-    if (total() > 40000) {
+    if (total > 40000) {
         discount = 10000;
     }
-    if (total() > 200000) {
+    if (total > 200000) {
         discount = 20000;
     }
-    if (total() > 300000) {
+    if (total > 300000) {
         discount = 30000;
     }
-    if (total() > 400000) {
+    if (total > 400000) {
         discount = 40000;
     }
 
-    const removeItem = (id) => {
-        dispatch(deleteToAllCart(id));
+    const removeItem = (item) => {
+        dispatch(removeFromCart(item));
     };
     const handleIncreaseQty = (item) => {
-        dispatch(addToCart({ ...item, count: +1, total: item.price }));
+        dispatch(increaseCart(item));
     };
     const handleDereaseQty = (item) => {
-        dispatch(removeToCart(item));
+        dispatch(decreaseCart(item));
     };
     return (
         <>
@@ -77,7 +71,7 @@ function Cart() {
                                                 <span
                                                     className={cx('btn-close')}
                                                     onClick={() => {
-                                                        removeItem(item.id);
+                                                        removeItem(item);
                                                     }}
                                                 >
                                                     {' '}
@@ -94,7 +88,7 @@ function Cart() {
                                                 >
                                                     -
                                                 </span>
-                                                <span className={cx('ini-qty')}> {item.count}</span>
+                                                <span className={cx('ini-qty')}> {item.cartQuantity}</span>
                                                 <span
                                                     onClick={() => {
                                                         handleIncreaseQty(item);
@@ -104,7 +98,9 @@ function Cart() {
                                                     +
                                                 </span>
                                             </td>
-                                            <td className={cx('total')}>{VND.format(item.total)} </td>
+                                            <td className={cx('total')}>
+                                                {VND.format(item.price * item.cartQuantity)}{' '}
+                                            </td>
                                         </tr>
                                     ))}
                                     <tr className={cx('t-last')}>
@@ -118,7 +114,7 @@ function Cart() {
                                         <td></td>
                                         <td className={cx('thanhtien')}>
                                             <div className={cx('temp-price')}>
-                                                Tạm tính: <span> {VND.format(total())} </span>
+                                                Tạm tính: <span> {VND.format(total)} </span>
                                             </div>
                                             <div className={cx('vat')}>(Đã bao gồm VAT)</div>
                                             <div className={cx('btn-checkout')}>
@@ -154,14 +150,14 @@ function Cart() {
                                 <div className={cx('bill-header')}>Hóa đơn của bạn</div>
                                 <div className={cx('bill-content')}>
                                     <div className={cx('bill-temp-price')}>
-                                        Tạm tính: <span> {VND.format(total())} </span>
+                                        Tạm tính: <span> {VND.format(total)} </span>
                                     </div>
 
                                     <div className={cx('discount')}>
                                         Giảm giá: <span>{VND.format(discount)} </span>
                                     </div>
                                     <div className={cx('total-item')}>
-                                        Tổng tiền: <span>{VND.format(total() - discount)} </span>
+                                        Tổng tiền: <span>{VND.format(total - discount)} </span>
                                     </div>
 
                                     <div className={cx('vat')}>(Đã bao gồm VAT)</div>
@@ -242,7 +238,7 @@ function Cart() {
                                                 >
                                                     -
                                                 </span>
-                                                <span className={cx('mb-ini-qty')}> {item.count}</span>
+                                                <span className={cx('mb-ini-qty')}> {item.cartQuantity}</span>
                                                 <span
                                                     onClick={() => {
                                                         handleIncreaseQty(item);
@@ -251,7 +247,10 @@ function Cart() {
                                                 >
                                                     +
                                                 </span>
-                                                <span className={cx('mb-item-price')}> x {item.price} đ</span>
+                                                <span className={cx('mb-item-price')}>
+                                                    {' '}
+                                                    x {VND.format(item.price)}{' '}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -260,14 +259,14 @@ function Cart() {
                         </div>
                         <div className={cx('bill-content')}>
                             <div className={cx('bill-temp-price')}>
-                                Tạm tính: <span> {VND.format(total())} </span>
+                                Tạm tính: <span> {VND.format(total)} </span>
                             </div>
 
                             <div className={cx('discount')}>
                                 Giảm giá: <span>{VND.format(discount)} </span>
                             </div>
                             <div className={cx('total-item')}>
-                                Tổng tiền: <span>{VND.format(total() - discount)} </span>
+                                Tổng tiền: <span>{VND.format(total - discount)} </span>
                             </div>
 
                             <div className={cx('vat')}>

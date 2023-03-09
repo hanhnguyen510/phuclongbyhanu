@@ -8,7 +8,8 @@ import { Button } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addDataCustomer } from '../../../redux/actions';
+import { addDataCustomer } from '../../../redux/features/customerInforSlice';
+
 const cx = classNames.bind(styles);
 
 function PaymentInfor() {

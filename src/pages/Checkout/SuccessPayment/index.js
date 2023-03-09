@@ -9,25 +9,36 @@ import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { paymentSuccess } from '../../../redux/actions';
+import { clearCart } from '../../../redux/features/cartsSlice';
 const cx = classNames.bind(styles);
 
 function SuccessPayment() {
     const dispatch = useDispatch();
-    const data = useSelector((state) => state.customerInforReducer.dataCustomer);
-    let dataCart = useSelector((state) => state.cartReducer.carts);
-    const handleDataCart = () => {
-        dispatch(paymentSuccess());
-    };
-    const total = () => {
-        const price = dataCart.map((item) => item.total);
 
-        return price.reduce((sum, item) => sum + item, 0);
+    let dataCart = useSelector((state) => state.carts.cartItems);
+    let dataCustomer = useSelector((state) => state.dataCustomer.customerInfor);
+    const handleDataCart = () => {
+        dispatch(clearCart());
     };
+    const total = useSelector((state) => state.carts.cartTotalAmount);
     const VND = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
     });
+
+    let discount = 0;
+    if (total > 40000) {
+        discount = 10000;
+    }
+    if (total > 200000) {
+        discount = 20000;
+    }
+    if (total > 300000) {
+        discount = 30000;
+    }
+    if (total > 400000) {
+        discount = 40000;
+    }
     return (
         <div className={cx('container')}>
             <div className={cx('block-process')}>
@@ -73,16 +84,16 @@ function SuccessPayment() {
                         <span> Mã đơn hàng: </span> 300933387
                     </div>
                     <div className={cx('infor')}>
-                        <span> Người đặt: </span> {data.name}
+                        <span> Người đặt: </span> {dataCustomer.name}
                     </div>
                     <div className={cx('infor')}>
-                        <span> Số điện thoại: </span> {data.phone}
+                        <span> Số điện thoại: </span> {dataCustomer.phone}
                     </div>
                     <div className={cx('infor')}>
-                        <span> Giao đến: </span> {data.address}
+                        <span> Giao đến: </span> {dataCustomer.address}
                     </div>
                     <div className={cx('infor')}>
-                        <span> Tổng tiền: </span> {VND.format(total())}
+                        <span> Tổng tiền: </span> {VND.format(total - discount)}
                     </div>
                 </div>
 
@@ -99,7 +110,7 @@ function SuccessPayment() {
                                 </div>
                                 <div className={cx('item-qty')}>
                                     {' '}
-                                    <span>Số lượng: </span> {item.count}
+                                    <span>Số lượng: </span> {item.cartQuantity}
                                 </div>
                             </div>
                         </div>
