@@ -1,15 +1,15 @@
-import Footer from './Footer';
-import Header from './Header';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 import styles from './Layout.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import { useState } from 'react';
-import zIndex from '@mui/material/styles/zIndex';
+
 const cx = classNames.bind(styles);
 
-function Layout({ children }) {
+function DefaultLayout({ children }) {
     const [visible, setVisible] = useState(false);
 
     const toggleVisible = () => {
@@ -55,4 +55,4 @@ function Layout({ children }) {
     );
 }
 
-export default Layout;
+export default DefaultLayout;

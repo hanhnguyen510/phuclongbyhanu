@@ -21,29 +21,44 @@ import { Bakerys } from '../pages/Products';
 //tea
 import DamViTraTruyenThong from '../pages/Tea/DamViTraTruyenThong';
 import LuaChonLaTra from '../pages/Tea/LuaChonLaTra';
+
+import Signin from '../pages/Auth/Signin';
+import Signup from '../pages/Auth/Signup';
+
+import config from '~/config';
+
+//Protected Route
+import ProtectedRoute from '../components/ProtectedRoute';
 const publicRoute = [
-    { path: '/', component: Home },
-    { path: '/aboutus', component: Aboutus },
+    { path: config.routes.home, component: Home },
+    { path: config.routes.aboutus, component: Aboutus },
 
     //CART
-    { path: '/cart', component: Cart },
-    { path: '/cart/payment-infor', component: PaymentInfor },
-    { path: '/cart/payment', component: Payment },
-    { path: '/cart/success', component: SuccessPayment },
+    { path: config.routes.cart, component: Cart },
 
     // drinks
-    { path: '/drinks/dam-vi-hat-ca-phe', component: DamHatCaPhe },
-    { path: '/drinks/huong-vi-manh-me', component: HuongViManhMe },
-    { path: '/drinks/huong-vi-tinh-te', component: HuongViTinhTe },
-    { path: '/drinks/ca-phe-mui', component: CaPheMui },
+    { path: config.routes.drinksDamViCaPhe, component: DamHatCaPhe },
+    { path: config.routes.drinksHuongViManhMe, component: HuongViManhMe },
+    { path: config.routes.drinksHuongViTinhTe, component: HuongViTinhTe },
+    { path: config.routes.drinksCaPheMui, component: CaPheMui },
 
     //tea
-    { path: '/tea/dam_vi_tra_Truyen_thong', component: DamViTraTruyenThong },
-    { path: '/tea/lua_chon_la_tra', component: LuaChonLaTra },
+    { path: config.routes.teaDamViTra, component: DamViTraTruyenThong },
+    { path: config.routes.teaLLuaChon, component: LuaChonLaTra },
     //products
-    { path: '/catogy/products', component: Product },
-    { path: '/catogy/snacks', component: Snacks },
-    { path: '/catogy/bakery', component: Bakerys },
-    { path: '/promotions', component: Promotions },
+    { path: config.routes.catogyProducts, component: Product },
+    { path: config.routes.catodySnacks, component: Snacks },
+    { path: config.routes.catogyBakery, component: Bakerys },
+    { path: config.routes.promotions, component: Promotions },
+
+    // login/logout
+    { path: config.routes.sigin, component: Signin, layout: null },
+    { path: config.routes.sigup, component: Signup, layout: null },
 ];
-export { publicRoute };
+
+const privateRoute = [
+    { path: config.routes.cartPaymentInfor, component: PaymentInfor, protected: ProtectedRoute },
+    { path: config.routes.cartPayment, component: Payment, protected: ProtectedRoute },
+    { path: config.routes.cartSuccessPayment, component: SuccessPayment, protected: ProtectedRoute },
+];
+export { publicRoute, privateRoute };

@@ -2,18 +2,22 @@ import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { Link, NavLink } from 'react-router-dom';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useRef, useState } from 'react';
+import { useRef, useState, useContext } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import { delivery, logo, logo1, logo2 } from '../../../utils/imageHome';
+import { delivery, logo, logo1, logo2 } from '~/utils/imageHome';
 import deliveryMobile from '~/assets/images/Home/delivery-mobile.png';
-import Cart from '../../Cart';
-
+import Cart from '~/components/Cart';
+import { userAuthContext } from '../../../context/UserAuthContext';
+import config from '../../../config';
 const cx = classNames.bind(styles);
 function Header() {
+    const { user } = useContext(userAuthContext);
+    const { logOut } = useContext(userAuthContext);
+
     const menuRef = useRef();
     const [showMenu, setShowMenu] = useState(false);
 
@@ -22,8 +26,9 @@ function Header() {
     };
     const dispatch = useDispatch();
 
-    // const data = useSelector((state) => state.userReducer.user);
-    const singOutHandler = () => {};
+    const singOutHandler = () => {
+        logOut();
+    };
 
     // cart in mobile
     const VND = new Intl.NumberFormat('vi-VN', {
@@ -32,13 +37,7 @@ function Header() {
     });
     const qty = useSelector((state) => state.carts.cartTotalQuantity);
     const total = useSelector((state) => state.carts.cartTotalAmount);
-    // const count = dataCart.map((item) => item.count);
-    // const qty = count.reduce((sum, item) => sum + item, 0);
-    // const total = () => {
-    //     const price = dataCart.map((item) => item.total);
 
-    //     return price.reduce((sum, item) => sum + item, 0);
-    // };
     return (
         <header className={cx('wrapper')}>
             <div className={cx('h-top')}>
@@ -61,9 +60,9 @@ function Header() {
                     </a>
                     <div className={cx('action')}>
                         <Link to="/" className={cx('account')}></Link>
-                        {/* {data ? (
+                        {user ? (
                             <div className={cx('userLogin')}>
-                                <img className={cx('avatar')} src={data.photoURL} alt="" />
+                                <img className={cx('avatar')} src={user.photoURL} alt="" />
 
                                 <Link to="/" className={cx('log-out')} onClick={singOutHandler}>
                                     <LogoutIcon className={cx('logout-icon')} />
@@ -71,10 +70,10 @@ function Header() {
                                 </Link>
                             </div>
                         ) : (
-                            <Link to="/login" className={cx('account')}>
-                                <span>Log in</span>
+                            <Link to={config.routes.sigin} className={cx('account')}>
+                                <span>Đăng nhập</span>
                             </Link>
-                        )} */}
+                        )}
                         <div className={cx('lang-wrapper')}>
                             <Link to="/">
                                 <span className={cx('lang-item', 'active')}>VN</span>
@@ -244,6 +243,18 @@ function Header() {
                                     </ul>
                                 </li>
                             </ul>
+                        </li>
+
+                        <li className={cx('item', 'item-mb')}>
+                            <NavLink
+                                onClick={toggleMenu}
+                                to={config.routes.sigin}
+                                style={({ isActive }) => ({
+                                    color: isActive ? '#0c713d' : '',
+                                })}
+                            >
+                                ĐĂNG NHẬP
+                            </NavLink>
                         </li>
                     </ul>
                     <button className={cx('icon-search')}>

@@ -1,4 +1,4 @@
-import { SliderBanner } from '../../components/Layout/Slider';
+import { SliderBanner } from '~/Layout/Components/Slider';
 import { teaBanner } from '../../utils/imageBanner';
 import styles from './Tea.module.scss';
 import { NavLink } from 'react-router-dom';

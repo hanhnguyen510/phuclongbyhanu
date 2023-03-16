@@ -1,7 +1,7 @@
 import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import { SliderHome } from '../../components/Layout/Slider';
 
+import { SliderHome } from '~/Layout/Components/Slider';
 import { Link } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
 import Dropdown from '../../components/Dropdown';
@@ -3424,137 +3424,138 @@ function Home() {
         return address[index].includes(city) && address[index].includes(district);
     });
 
-    console.log(Filter);
     return (
         <>
             <SliderHome />
-            <div className={cx('content')}>
-                <Grid container rowSpacing={1}>
-                    <Grid item md={6} xs={12}>
-                        <img
-                            className={cx('img-1')}
-                            src="https://phuclong.com.vn/uploads/post/20649d183ca5f1-bannertrangchu.jpg"
-                            alt="tra"
-                        />
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <div className={cx('item')}>
-                            <h3 className={cx('title')}>TỪ NHỮNG MẦM TRÀ, CHÚNG TÔI TẠO RA NIỀM ĐAM MÊ</h3>
-                            <p className={cx('text')}>
-                                Trải Qua hơn 50 năm chắt chiu tinh hoa từ những búp trà xanh và hạt cà phê thượng hạng
-                                cùng mong muốn mang lại cho khách hàng những trải nghiệm giá trị nhất khi thưởng thức,
-                                Phúc Long liên tục là thương hiệu tiên phong với nhiều ý tưởng sáng tạo đi đầu trong
-                                ngành trà và cà phê.{' '}
-                            </p>
-
-                            <p className={cx('text')}>
-                                Chúng tôi tin rằng từng sản phẩm trà và cà phê sẽ càng thêm hảo hạng khi được tạo ra từ
-                                sự phấn đấu không ngừng cùng niềm đam mê. Và chính kết nối dựa trên niềm tin, sự trung
-                                thực và tin yêu sẽ góp phần mang đến những nét đẹp trong văn hóa thưởng trà và cà phê
-                                ngày càng bay cao, vươn xa.
-                            </p>
-                            <Link to="/aboutus">
-                                <Button
-                                    variant="outlined"
-                                    size="medium"
-                                    sx={{
-                                        fontSize: '1.3rem',
-                                        backgroundColor: '#fff',
-                                        color: '#0c713d',
-                                        borderColor: '#0c713d',
-                                        '&:hover': {
-                                            backgroundColor: '#0c713d',
-                                            color: '#fff',
-                                            borderColor: '#0c713d',
-                                        },
-                                    }}
-                                >
-                                    XEM THÊM
-                                </Button>
-                            </Link>
-                        </div>
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <div className={cx('item')}>
-                            <h3 className={cx('title')}>ĐỘI NGŨ NHÂN VIÊN TRÀN ĐẦY NHIỆT HUYẾT</h3>
-                            <p className={cx('text')}>
-                                Trong suốt Quá trình hoạt động và phát triển, đội ngũ Quản lý và nhân viên của Phúc Long
-                                Coffee & Tea, Qua bao thế hệ, đã cùng nhau xây dựng, nuôi dưỡng niềm đam mê dành cho trà
-                                và cà phê với mong muốn được thử thách bản thân trong ngành dịch vụ năng động và sáng
-                                tạo.
-                            </p>
-
-                            <Link to="/aboutus">
-                                <Button
-                                    variant="outlined"
-                                    size="medium"
-                                    sx={{
-                                        fontSize: '1.3rem',
-                                        backgroundColor: '#fff',
-                                        color: '#0c713d',
-                                        borderColor: '#0c713d',
-                                        '&:hover': {
-                                            backgroundColor: '#0c713d',
-                                            color: '#fff',
-                                            borderColor: '#0c713d',
-                                        },
-                                    }}
-                                >
-                                    GIA NHẬP ĐỘI NGŨ PHÚC LONG
-                                </Button>
-                            </Link>
-                        </div>
-                    </Grid>
-                    <Grid item md={6} xs={12}>
-                        <div>
+            <div className={cx('container')}>
+                <div className={cx('content')}>
+                    <Grid container rowSpacing={1}>
+                        <Grid item md={6} xs={12}>
                             <img
                                 className={cx('img-1')}
-                                src="https://phuclong.com.vn/uploads/post/024b7d5e73bbb2-8ed98f521583690431954887e772tuyendung1.jpg"
+                                src="https://phuclong.com.vn/uploads/post/20649d183ca5f1-bannertrangchu.jpg"
                                 alt="tra"
                             />
-                        </div>
-                    </Grid>
-                </Grid>
-            </div>
-            <div className={cx('map')}>
-                <div className={cx('map-content')}>
-                    <h2 className={cx('heading')}>HỆ THỐNG CỬA HÀNG</h2>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} md={6}>
-                            <div className={cx('dropdown')}>
-                                <Dropdown options={listCity} selected={city} setSelected={setCity} />
-                                <Dropdown options={listDistrict} selected={district} setSelected={setDistric} />
-                            </div>
-                            <h4>ĐỈA CHỈ CỬA HÀNG</h4>
-                            <ul className={cx('map-list-store')}>
-                                {Filter.map((location) => (
-                                    <li>
-                                        <StoreIcon sx={{ fontSize: '34px' }} />
-                                        <div className={cx('infor')}>
-                                            {location.title} - {location.address}
-                                            <div className={cx('phone')}>Số điện thoại : {location.phone}</div>
-                                        </div>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
+                            <div className={cx('item')}>
+                                <h3 className={cx('title')}>TỪ NHỮNG MẦM TRÀ, CHÚNG TÔI TẠO RA NIỀM ĐAM MÊ</h3>
+                                <p className={cx('text')}>
+                                    Trải Qua hơn 50 năm chắt chiu tinh hoa từ những búp trà xanh và hạt cà phê thượng
+                                    hạng cùng mong muốn mang lại cho khách hàng những trải nghiệm giá trị nhất khi
+                                    thưởng thức, Phúc Long liên tục là thương hiệu tiên phong với nhiều ý tưởng sáng tạo
+                                    đi đầu trong ngành trà và cà phê.{' '}
+                                </p>
 
-                                        <Button
-                                            variant="outlined"
-                                            sx={{
-                                                fontSize: '1.3rem',
+                                <p className={cx('text')}>
+                                    Chúng tôi tin rằng từng sản phẩm trà và cà phê sẽ càng thêm hảo hạng khi được tạo ra
+                                    từ sự phấn đấu không ngừng cùng niềm đam mê. Và chính kết nối dựa trên niềm tin, sự
+                                    trung thực và tin yêu sẽ góp phần mang đến những nét đẹp trong văn hóa thưởng trà và
+                                    cà phê ngày càng bay cao, vươn xa.
+                                </p>
+                                <Link to="/aboutus">
+                                    <Button
+                                        variant="outlined"
+                                        size="medium"
+                                        sx={{
+                                            fontSize: '1.3rem',
+                                            backgroundColor: '#fff',
+                                            color: '#0c713d',
+                                            borderColor: '#0c713d',
+                                            '&:hover': {
                                                 backgroundColor: '#0c713d',
                                                 color: '#fff',
-                                                borderColor: '#fff',
-                                                '&:hover': {
-                                                    borderColor: 'red',
-                                                },
-                                            }}
-                                            onClick={() => window.open(location.url, '_blank')}
-                                        >
-                                            Chỉ đường
-                                        </Button>
-                                    </li>
-                                ))}
-                            </ul>
+                                                borderColor: '#0c713d',
+                                            },
+                                        }}
+                                    >
+                                        XEM THÊM
+                                    </Button>
+                                </Link>
+                            </div>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
+                            <div className={cx('item')}>
+                                <h3 className={cx('title')}>ĐỘI NGŨ NHÂN VIÊN TRÀN ĐẦY NHIỆT HUYẾT</h3>
+                                <p className={cx('text')}>
+                                    Trong suốt Quá trình hoạt động và phát triển, đội ngũ Quản lý và nhân viên của Phúc
+                                    Long Coffee & Tea, Qua bao thế hệ, đã cùng nhau xây dựng, nuôi dưỡng niềm đam mê
+                                    dành cho trà và cà phê với mong muốn được thử thách bản thân trong ngành dịch vụ
+                                    năng động và sáng tạo.
+                                </p>
+
+                                <Link to="/aboutus">
+                                    <Button
+                                        variant="outlined"
+                                        size="medium"
+                                        sx={{
+                                            fontSize: '1.3rem',
+                                            backgroundColor: '#fff',
+                                            color: '#0c713d',
+                                            borderColor: '#0c713d',
+                                            '&:hover': {
+                                                backgroundColor: '#0c713d',
+                                                color: '#fff',
+                                                borderColor: '#0c713d',
+                                            },
+                                        }}
+                                    >
+                                        GIA NHẬP ĐỘI NGŨ PHÚC LONG
+                                    </Button>
+                                </Link>
+                            </div>
+                        </Grid>
+                        <Grid item md={6} xs={12}>
+                            <div>
+                                <img
+                                    className={cx('img-1')}
+                                    src="https://phuclong.com.vn/uploads/post/024b7d5e73bbb2-8ed98f521583690431954887e772tuyendung1.jpg"
+                                    alt="tra"
+                                />
+                            </div>
                         </Grid>
                     </Grid>
+                </div>
+                <div className={cx('map')}>
+                    <div className={cx('map-content')}>
+                        <h2 className={cx('heading')}>HỆ THỐNG CỬA HÀNG</h2>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} md={6}>
+                                <div className={cx('dropdown')}>
+                                    <Dropdown options={listCity} selected={city} setSelected={setCity} />
+                                    <Dropdown options={listDistrict} selected={district} setSelected={setDistric} />
+                                </div>
+                                <h4>ĐỈA CHỈ CỬA HÀNG</h4>
+                                <ul className={cx('map-list-store')}>
+                                    {Filter.map((location) => (
+                                        <li>
+                                            <StoreIcon sx={{ fontSize: '34px' }} />
+                                            <div className={cx('infor')}>
+                                                {location.title} - {location.address}
+                                                <div className={cx('phone')}>Số điện thoại : {location.phone}</div>
+                                            </div>
+
+                                            <Button
+                                                variant="outlined"
+                                                sx={{
+                                                    fontSize: '1.3rem',
+                                                    backgroundColor: '#0c713d',
+                                                    color: '#fff',
+                                                    borderColor: '#fff',
+                                                    '&:hover': {
+                                                        borderColor: 'red',
+                                                    },
+                                                }}
+                                                onClick={() => window.open(location.url, '_blank')}
+                                            >
+                                                Chỉ đường
+                                            </Button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Grid>
+                        </Grid>
+                    </div>
                 </div>
             </div>
         </>

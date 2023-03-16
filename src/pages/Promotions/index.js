@@ -1,5 +1,6 @@
 import { aboutusBanner } from '../../utils/imageBanner';
-import { SliderBanner } from '../../components/Layout/Slider';
+// import { SliderBanner } from '~/Components/Slider';
+import { SliderBanner } from '~/Layout/Components/Slider';
 function Promotions() {
     return <SliderBanner image={aboutusBanner} />;
 }

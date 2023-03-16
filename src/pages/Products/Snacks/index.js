@@ -6,7 +6,7 @@ import { listSnacks } from '~/utils/imageListProducts';
 import Modal from '~/components/Modal';
 import { NavLink } from 'react-router-dom';
 import { snackBanner } from '~/utils/imageBanner';
-import { SliderBanner } from '~/components/Layout/Slider';
+import { SliderBanner } from '~/Layout/Components/Slider';
 
 const cx = classNames.bind(styles);
 

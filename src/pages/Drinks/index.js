@@ -2,7 +2,7 @@ import styles from './Drinks.module.scss';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import { SliderBanner } from '../../components/Layout/Slider';
+import { SliderBanner } from '~/Layout/Components/Slider';
 import { cafeBanner } from '../../utils/imageBanner';
 const cx = classNames.bind(styles);
 

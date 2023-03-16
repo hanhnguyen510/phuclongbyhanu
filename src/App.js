@@ -1,30 +1,64 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoute } from '~/Routes';
-import Login from '~/pages/Login';
-import Layout from './components/Layout';
+import { Fragment } from 'react';
+import DefaultLayout from '~/Layout/DefaultLayout';
+import UserAuthContext from './context/UserAuthContext';
+import { privateRoute } from './Routes';
 function App() {
     return (
-        <Router>
-            <div className="App">
-                <Routes>
-                    {publicRoute.map((route, index) => {
-                        const Page = route.component;
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                element={
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
-                                }
-                            />
-                        );
-                    })}
-                    <Route path="/login" element={<Login />} />
-                </Routes>
-            </div>
-        </Router>
+        <UserAuthContext>
+            <Router>
+                <div className="App">
+                    <Routes>
+                        {/* public route */}
+                        {publicRoute.map((route, index) => {
+                            const Page = route.component;
+                            let Layout = DefaultLayout;
+                            if (route.layout) {
+                                Layout = route.layout;
+                            } else if (route.layout === null) {
+                                Layout = Fragment;
+                            }
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            );
+                        })}
+                        {/* private route */}
+                        {privateRoute.map((route, index) => {
+                            const ProtectedRoute = route.protected;
+                            const Page = route.component;
+                            let Layout = DefaultLayout;
+                            if (route.layout) {
+                                Layout = route.layout;
+                            } else if (route.layout === null) {
+                                Layout = Fragment;
+                            }
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <ProtectedRoute>
+                                                <Page />
+                                            </ProtectedRoute>
+                                        </Layout>
+                                    }
+                                />
+                            );
+                        })}
+                    </Routes>
+                </div>
+            </Router>
+        </UserAuthContext>
     );
 }
 
