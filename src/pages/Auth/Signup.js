@@ -10,6 +10,8 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { useContext } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { userAuthContext } from '../../context/UserAuthContext';
 import config from '../../config';
@@ -39,14 +41,21 @@ function Signup() {
         }),
         onSubmit: async (values) => {
             try {
-                const userCredential = await signUp(values.email, values.password);
-                const user = userCredential.user;
-                navigate(config.routes.sigin);
-                console.log(user);
+                await signUp(values.email, values.password);
+
+                await toast.success('SIGNUP SUCCESS', {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                setTimeout(() => {
+                    navigate(config.routes.home);
+                }, 1000);
             } catch (error) {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+
+                toast.error(errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                console.log(errorMessage);
             }
         },
     });
@@ -55,15 +64,22 @@ function Signup() {
             await sigInWithGoogle();
             navigate(config.routes.home);
         } catch (error) {
-            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            toast.error(errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            console.log(errorMessage);
         }
     };
-
     return (
         <>
             <div className={cx('container')}>
+                <ToastContainer
+                    autoClose={2000}
+                    position="top-center"
+                    className="toast-container"
+                    toastClassName="dark-toast"
+                />
                 {/* <img className={cx('img-login')} src={trpl} alt="pl" /> */}
                 <div className={cx('login')}>
                     <div className={cx('header')}>

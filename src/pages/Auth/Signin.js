@@ -8,6 +8,8 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { userAuthContext } from '../../context/UserAuthContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import googleLogo from '~/assets/images/Login/google.svg';
 import fbLogo from '~/assets/images/Login/facebook.svg';
@@ -30,8 +32,10 @@ function Signin() {
             email: '',
         },
         validationSchema: Yup.object({
-            email: Yup.string().email('Please enter a valid email address').required('Required'),
-            password: Yup.string().required('Required').min(8, 'Password is too short - should be 8 chars minimum.'),
+            email: Yup.string().email('Email không hợp lệ').required('Vui lòng nhập email!'),
+            password: Yup.string()
+                .required('Vui lòng nhập mật khẩu')
+                .min(8, 'Password is too short - should be 8 chars minimum.'),
             // eslint-disable-next-line no-useless-escape
         }),
         onSubmit: async (values) => {
@@ -40,9 +44,11 @@ function Signin() {
 
                 navigate(config.routes.home);
             } catch (error) {
-                const errorCode = error.code;
                 const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+                toast.error(errorMessage, {
+                    position: toast.POSITION.TOP_RIGHT,
+                });
+                console.log(errorMessage);
             }
         },
     });
@@ -52,15 +58,23 @@ function Signin() {
             await sigInWithGoogle();
             navigate(config.routes.home);
         } catch (error) {
-            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
+            toast.error(errorMessage, {
+                position: toast.POSITION.TOP_RIGHT,
+            });
+            console.log(errorMessage);
         }
     };
 
     return (
         <>
             <div className={cx('container')}>
+                <ToastContainer
+                    autoClose={2000}
+                    position="top-center"
+                    className="toast-container"
+                    toastClassName="dark-toast"
+                />
                 {/* <img className={cx('img-login')} src={trpl} alt="pl" /> */}
                 <div className={cx('login')}>
                     <div className={cx('header')}>

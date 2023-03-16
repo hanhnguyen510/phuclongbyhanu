@@ -75,27 +75,27 @@ function Products() {
                                         <div className={cx('item-name')}>{data.name}</div>
                                         <div className={cx('item-desc')}>{data.desc}</div>
                                         <div className={cx('item-price')}>{VND.format(data.price)} </div>
-                                    </div>
-                                    <Button
-                                        variant="outlined"
-                                        size="medium"
-                                        sx={{
-                                            fontSize: '1.3rem',
-                                            backgroundColor: '#fff',
-                                            color: '#0c713d',
-                                            borderColor: '#0c713d',
-                                            '&:hover': {
-                                                backgroundColor: '#0c713d',
-                                                color: '#fff',
+                                        <Button
+                                            variant="outlined"
+                                            size="medium"
+                                            sx={{
+                                                fontSize: '1.3rem',
+                                                backgroundColor: '#fff',
+                                                color: '#0c713d',
                                                 borderColor: '#0c713d',
-                                            },
-                                        }}
-                                        onClick={() => {
-                                            handleShowModal(data);
-                                        }}
-                                    >
-                                        ĐẶT HÀNG
-                                    </Button>
+                                                '&:hover': {
+                                                    backgroundColor: '#0c713d',
+                                                    color: '#fff',
+                                                    borderColor: '#0c713d',
+                                                },
+                                            }}
+                                            onClick={() => {
+                                                handleShowModal(data);
+                                            }}
+                                        >
+                                            ĐẶT HÀNG
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </Grid>

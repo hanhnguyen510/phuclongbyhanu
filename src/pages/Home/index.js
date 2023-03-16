@@ -3393,7 +3393,7 @@ function Home() {
         'Tỉnh Tiền Giang',
         'Tỉnh Bến Tre',
     ];
-    var listDistrict = [];
+    let listDistrict = [];
     if (city === 'Thành phố Hồ Chí Minh') {
         listDistrict = [
             'Quận 1',

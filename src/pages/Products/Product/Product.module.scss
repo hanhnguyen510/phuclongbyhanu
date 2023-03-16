@@ -27,6 +27,7 @@
         font-size: 1.8rem;
 
         li {
+            margin-left: 6px;
             a {
                 padding: 0 25px;
                 display: block;
@@ -49,9 +50,11 @@
         max-height: 380px;
         &:hover {
             box-shadow: 0 1px 8px 0 rgb(107 107 107 / 27%);
+            transition: all 0.3s ease-in-out;
         }
     }
     .item-wrapper {
+        padding: 12px 0;
         .item-img {
             margin-bottom: 15px;
         }

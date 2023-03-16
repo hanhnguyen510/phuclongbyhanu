@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useRef, useState, useContext } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -13,6 +13,7 @@ import deliveryMobile from '~/assets/images/Home/delivery-mobile.png';
 import Cart from '~/components/Cart';
 import { userAuthContext } from '../../../context/UserAuthContext';
 import config from '../../../config';
+import noAvatar from '~/assets/images/Home/no-avatar.png';
 const cx = classNames.bind(styles);
 function Header() {
     const { user } = useContext(userAuthContext);
@@ -24,7 +25,6 @@ function Header() {
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
-    const dispatch = useDispatch();
 
     const singOutHandler = () => {
         logOut();
@@ -62,7 +62,7 @@ function Header() {
                         <Link to="/" className={cx('account')}></Link>
                         {user ? (
                             <div className={cx('userLogin')}>
-                                <img className={cx('avatar')} src={user.photoURL} alt="" />
+                                <img className={cx('avatar')} src={user.photoURL ? user.photoURL : noAvatar} alt="" />
 
                                 <Link to="/" className={cx('log-out')} onClick={singOutHandler}>
                                     <LogoutIcon className={cx('logout-icon')} />
@@ -246,15 +246,21 @@ function Header() {
                         </li>
 
                         <li className={cx('item', 'item-mb')}>
-                            <NavLink
-                                onClick={toggleMenu}
-                                to={config.routes.sigin}
-                                style={({ isActive }) => ({
-                                    color: isActive ? '#0c713d' : '',
-                                })}
-                            >
-                                ĐĂNG NHẬP
-                            </NavLink>
+                            {user ? (
+                                <Link to="/" className={cx('log-out')} onClick={singOutHandler}>
+                                    <div className={cx('logout-text')}> ĐĂNG XUẤT</div>
+                                </Link>
+                            ) : (
+                                <NavLink
+                                    onClick={toggleMenu}
+                                    to={config.routes.sigin}
+                                    style={({ isActive }) => ({
+                                        color: isActive ? '#0c713d' : '',
+                                    })}
+                                >
+                                    ĐĂNG NHẬP
+                                </NavLink>
+                            )}
                         </li>
                     </ul>
                     <button className={cx('icon-search')}>
